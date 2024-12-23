@@ -1,7 +1,7 @@
 name: deploying
 on: [push,workflow_dispatch]
 jobs:
-    deployment:
+    lintingt:
         runs-on: windows-latest
         steps:
             - name: checkout code
@@ -9,10 +9,25 @@ jobs:
             - name: install dependencies
               run: npm ci
             - name: linting test
-              run: npoom run lint
-            - name: testing code
-              run: npm run test
+              run: npm run lint
+    testing:
+        runs-on: windows-latest
+        steps:
+           - name: checking code
+             uses: actions/checkout@v3
+           - name: installing dependencies
+             run: npm ci
+           - name: testing code
+             run: npm run test
+    deploying:
+        runs-on: windows-latest
+        needs: [lintingt,testing]
+        steps:
+            - name: checking code
+              uses: actions/checkout@v3
+            - name: installing dependencies
+              uses: npm ci
             - name: building code
-              run: npm run build
+              uses: npm run build 
             - name: deploying code
-              run: echo "deploying...."
+              run:  echo " deploying code"
