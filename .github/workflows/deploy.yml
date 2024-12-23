@@ -26,8 +26,8 @@ jobs:
             - name: checking code
               uses: actions/checkout@v3
             - name: installing dependencies
-              uses: npm ci
+              run: npm ci
             - name: building code
-              uses: npm run build 
+              run: npm run build 
             - name: deploying code
               run:  echo " deploying code"
