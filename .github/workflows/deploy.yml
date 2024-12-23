@@ -12,6 +12,7 @@ jobs:
               run: npm run lint
     testing:
         runs-on: windows-latest
+        needs:  lintingt
         steps:
            - name: checking code
              uses: actions/checkout@v3
